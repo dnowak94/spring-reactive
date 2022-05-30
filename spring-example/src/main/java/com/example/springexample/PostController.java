@@ -25,7 +25,6 @@ public class PostController {
 
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Iterable<Post> all() {
-        // This returns a JSON or XML with the users
         return repo.findAll();
     }
 

@@ -51,13 +51,14 @@ public class TestClient {
                 .bodyToMono(Post.class);
     }
 
-    public Mono<ClientResponse> create() {
+    public Mono<Post> create() {
         logger.info("creating a new post...");
         var post = new PostRequest("Post", "This is a post.");
         long startTime = System.nanoTime();
         return client.post()
                 .uri("/posts")
                 .bodyValue(post)
-                .exchangeToMono(resp ->Mono.just(resp));
+                .retrieve()
+                .bodyToMono(Post.class);
     }
 }

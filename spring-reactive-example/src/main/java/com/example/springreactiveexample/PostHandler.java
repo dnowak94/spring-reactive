@@ -1,4 +1,5 @@
 package com.example.springreactiveexample;
+
 import com.example.springreactiveexample.model.Post;
 import com.example.springreactiveexample.repository.PostRepository;
 import org.slf4j.Logger;
@@ -8,7 +9,9 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
 import java.net.URI;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Component
@@ -36,12 +39,6 @@ class PostHandler {
         logger.info("getPost("+ req.pathVariable("id")+")");
         return repo.findById(Long.valueOf(req.pathVariable("id")))
                 .flatMap(post -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(post),Post.class))
-                .switchIfEmpty(ServerResponse.notFound().build());
-    }
-
-    public Mono<ServerResponse> delete(ServerRequest req) {
-        return repo.findById(Long.valueOf(req.pathVariable("id")))
-                .flatMap(post -> ServerResponse.ok().build(repo.delete(post)))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 }

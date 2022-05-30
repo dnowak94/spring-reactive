@@ -19,7 +19,6 @@ public class PostRouterConfig {
                 .GET("/posts", accept(MediaType.APPLICATION_JSON), postHandler::listPosts)
                 .POST("/posts", contentType(MediaType.APPLICATION_JSON), postHandler::createPost)
                 .GET("/posts/{id}",accept(MediaType.TEXT_PLAIN), postHandler::getPost)
-                .DELETE("/posts/{id}", accept(MediaType.TEXT_PLAIN), postHandler::delete)
                 .build();
     }
 }

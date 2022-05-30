@@ -44,13 +44,12 @@ public class PostController {
         System.out.println(post);
         Post newPost = new Post(post.getTitle(),post.getContent());
         Post savedPost = this.repo.save(newPost);
-        if(newPost != null) {
+        if(savedPost != null) {
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")
                     .buildAndExpand(savedPost.getId())
                     .toUri();
-            return ResponseEntity.created(uri)
-                    .body(newPost);
+            return ResponseEntity.created(uri).body(savedPost);
         } else {
             return ResponseEntity.internalServerError().build();
         }

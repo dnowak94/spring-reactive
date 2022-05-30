@@ -19,9 +19,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class SpringReactiveExampleApplication {
-
     private static final Logger log = LoggerFactory.getLogger(SpringReactiveExampleApplication.class);
-
     public static void main(String[] args) {
         SpringApplication.run(SpringReactiveExampleApplication.class, args);
     }
@@ -38,21 +36,13 @@ public class SpringReactiveExampleApplication {
     public CommandLineRunner demo(PostRepository repository) {
         List<Post> posts = new ArrayList<>();
         int number_of_entries = 1000;
-        for(int i = 1; i <= number_of_entries; i++) {
+        for (int i = 1; i <= number_of_entries; i++) {
             posts.add(new Post("Post" + i, "This is post" + i + "."));
         }
         return (args) -> {
-            // save a few customers
+            // save a few posts
             repository.saveAll(posts)
-            .blockLast(Duration.ofSeconds(10));
-
-            // fetch all customers
-            log.info("Posts found with findAll():");
-            log.info("-------------------------------");
-            repository.findAll().doOnNext(post -> {
-                log.info(post.toString());
-            }).blockLast(Duration.ofSeconds(10));
-            log.info("");
+                    .blockLast(Duration.ofSeconds(10));
         };
     }
 }

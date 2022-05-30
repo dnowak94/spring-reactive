@@ -1,19 +1,20 @@
 package com.example.springreactiveexample.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @ToString
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Getter
-public class Post implements Serializable {
+public class Post {
     @Id
     private Long id;
 

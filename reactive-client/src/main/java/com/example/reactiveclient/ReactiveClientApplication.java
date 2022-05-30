@@ -22,12 +22,10 @@ public class ReactiveClientApplication {
     @Bean
     public CommandLineRunner demo(TestClient c) {
         return args -> {
-            c.create().subscribe(resp -> logger.info(resp.statusCode().toString()),
+            c.create().subscribe(p -> logger.info(p.toString()),
                     error -> logger.error(error.getMessage()));
             c.getPostById(20).timeout(Duration.ofSeconds(3)).subscribe(p -> logger.info(p.toString()));
-            // List<Post> posts;
-            // c.getAllPosts().subscribe(p -> logger.info(p.toString()));
-            // c.getAllPosts();
+            c.getAllPosts().subscribe(p -> logger.info(p.toString()));
         };
     }
 }

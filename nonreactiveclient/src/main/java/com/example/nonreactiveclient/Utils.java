@@ -1,6 +1,7 @@
 package com.example.nonreactiveclient;
 
 import java.text.DecimalFormat;
+// source: https://github.com/dnowak94/vislab/blob/master/lab1/lab1-example/src/main/java/de/hska/iwi/vislab/lab1/example/TestWsClient.java
 
 public class Utils {
     public static long calcDuration(long startTime) {
